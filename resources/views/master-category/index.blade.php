@@ -47,6 +47,7 @@
                 <td>{{ $i + 1 }}</td>
                 <td>{{ $k->nama }}</td>
                 <td>
+                    <a href="{{ url('/master-category/detail/'.$k->id) }}" class="btn btn-info btn-sm">Detail</a>
                     <a href="{{ url('/master-category/form/edit/'.$k->id) }}" class="btn btn-warning btn-sm">Edit</a>
                     <a href="{{ url('/master-category/delete/'.$k->id) }}" class="btn btn-danger btn-sm"
                        onclick="return confirm('Apakah yakin ingin menghapus?')">
