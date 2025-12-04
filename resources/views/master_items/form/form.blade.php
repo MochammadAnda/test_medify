@@ -1,4 +1,5 @@
-<form method="POST">
+<form method="POST" enctype="multipart/form-data"
+      action="{{ url('master-items/form/'.$method.'/'.($item->id ?? '')) }}">
     @csrf
     @if($method == 'edit')
     <div class="form-group">
@@ -22,6 +23,19 @@
         <input type="number" class="form-control" name="laba" required  value="{{$item->laba ?? ''}}">
     </div>
 
+    <div class="form-group">
+        <label>Foto item</label>
+        <input type="file" class="form-control" name="foto" accept="image/*">
+        <small class="text-muted">Format: jpeg, png, jpg.Kosongkan jika tidak ingin mengubah foto</small>
+
+        @if(isset ($item->foto) && $item->foto)
+        <div class="mt-2 p-2 border rounded" style="width: fit-content;">
+            <p class="mb-1 text-sm"> Foto Saat Ini:</p>
+            <img src="{{asset('upload/items/'.$item->foto)}}" alt="Foto Item" style="max-width: 100%; max-height: 150px;">
+        </div>
+        @endif
+    </div>
+
     @php $selected = $item->supplier ?? ''; @endphp
     <div class="form-group">
         <label>Supplier</label>
@@ -31,7 +45,7 @@
             <option @if($selected == 'Bukulapuk') selected @endif>Bukulapuk</option>
             <option @if($selected == 'TokoBagas') selected @endif>TokoBagas</option>
             <option @if($selected == 'E Commurz') selected @endif>E Commurz</option>
-            <optio @if($selected == 'Blublu') selected @endif>Blublu</option>
+            <option @if($selected == 'Blublu') selected @endif>Blublu</option>
         </select>
     </div>
 
@@ -47,6 +61,25 @@
             <optio @if($selected == 'ATK') selected @endif>ATK</option>
         </select>
     </div>
+
+    <div class="form-group">
+    <label>Kategori Item</label>
+    <select name="kategori_id[]" class="form-control" multiple required>
+        @foreach($categories as $kat)
+            <option 
+                value="{{ $kat->id }}"
+                @if(isset($item) && $item->categories && $item->categories->contains($kat->id)) selected @endif
+            >
+                {{ $kat->nama }}
+            </option>
+        @endforeach
+    </select>
+    <small class="text-muted">Tekan CTRL untuk memilih lebih dari satu kategori.</small>
+</div>
+
+
+    <small class="text-muted">Pilih satu atau lebih kategori yang sesuai</small>
+</div>
 
     <button class="btn btn-primary mt-3">Submit</button>
 

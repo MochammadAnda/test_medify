@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\MasterCategoryController;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -29,5 +31,9 @@ Route::post('/master-items/form/{method}/{id?}', [App\Http\Controllers\MasterIte
 Route::get('/master-items/view/{kode}', [App\Http\Controllers\MasterItemsController::class, 'singleView']);
 Route::get('/master-items/delete/{id}', [App\Http\Controllers\MasterItemsController::class, 'delete']);
 
+Route::get('/master-category', [MasterCategoryController::class, 'index']);
+Route::get('/master-category/form/{method}/{id?}', [MasterCategoryController::class, 'formView']);
+Route::post('/master-category/form/{method}/{id?}', [MasterCategoryController::class, 'formSubmit']);
+Route::get('/master-category/delete/{id}', [MasterCategoryController::class, 'delete']);
 
 Route::get('/master-items/update-random-data', [App\Http\Controllers\MasterItemsController::class, 'updateRandomData']);

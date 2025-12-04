@@ -4,6 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 use App\Models\User;
+use Illuminate\Support\Facades\Hash;
 
 return new class extends Migration
 {
@@ -24,11 +25,11 @@ return new class extends Migration
             $table->timestamps();
         });
 
-	$user = new User;
-	$user->email = "123@123";
-	$user->name = "123";
-	$user->password = Hash::make("123");
-	$user->save();
+        $user = new User;
+        $user->email = "123@123";
+        $user->name = "123";
+        $user->password = Hash::make("123");
+        $user->save();
     }
 
     /**

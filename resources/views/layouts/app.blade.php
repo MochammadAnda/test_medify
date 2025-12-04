@@ -31,9 +31,25 @@
 
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <!-- Left Side Of Navbar -->
-                    <ul class="navbar-nav me-auto">
+                    <!-- Left Side Of Navbar -->
+<ul class="navbar-nav me-auto">
 
-                    </ul>
+    @auth
+    <li class="nav-item">
+        <a class="nav-link" href="{{ url('/master-category') }}">
+            Master Category
+        </a>
+    </li>
+
+    <li class="nav-item">
+        <a class="nav-link" href="{{ url('/master-items') }}">
+            Master Items
+        </a>
+    </li>
+    @endauth
+
+</ul>
+
 
                     <!-- Right Side Of Navbar -->
                     <ul class="navbar-nav ms-auto">

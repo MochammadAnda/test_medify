@@ -8,10 +8,15 @@
     var data_per_fetch = 500;
     var data_fetched = 0;
 
+    var uploadUrl = '{{ asset('upload/items') }}';
+
     $(document).ready(function() {
         $('#table').DataTable({
             searching: false,
             order: [[0, 'desc']],
+            columnDefs: [
+                { orderable: false, targets: [1, 7] } 
+            ]
         });
         getData()
     });
@@ -47,12 +52,19 @@
 
                     var html = `<a href="{{url('master-items/view/')}}/` + kode + `" class="btn btn-primary">View</a>`
 
+                    var imgHtml = '';
+                    if(item.foto){
+                        imgHtml = `<img src="${uploadUrl}/${item.foto}" width="50" height="50" style="object-fit: cover; border-radius: 4px;">`;
+                    } else {
+                        imgHtml = `<span class="text-muted">-</span>`;
+                    }
                     $.each(item, function(obj_name, obj_value) {
                         if (obj_name == 'laba') return false;
                         array_temp.push(obj_value)
                     })
                     array_temp.push(harga_jual)
                     array_temp.push(item.supplier)
+                    array_temp.push(imgHtml)
                     array_temp.push(html)
 
 
@@ -74,3 +86,4 @@
         })
     }
 </script>
+
